@@ -1,5 +1,11 @@
+"""
+This is a simple Pontoon game originally written in 2021 for an AJG coding 
+challenge
+
+"""
 import pygame
 import random
+import os
  
 pygame.init()
  
@@ -42,21 +48,28 @@ gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Pontoon by Andy G')
 
 def create_shoe():
+
+    #find path to games directory
+    dir = os.path.dirname(__file__)
+
     global current_deck
-    file_path = 'C:\\Users\\andyg\\Documents\\Data Science Skills Boot Camp\\Python Projects\\Pontoon\\images\\'
-    deck=[(11,file_path + 'ace_of_clubs.png'), (11,file_path + 'ace_of_hearts.png'), (11,file_path + 'ace_of_spades.png'), (11,file_path + 'ace_of_diamonds.png'),
-          (2,file_path + '2_of_clubs.png'), (2,file_path + '2_of_hearts.png'), (2,file_path + '2_of_spades.png'), (2,file_path + '2_of_diamonds.png'),
-          (3,file_path + '3_of_clubs.png'), (3,file_path + '3_of_hearts.png'), (3,file_path + '3_of_spades.png'), (3,file_path + '3_of_diamonds.png'),
-	      (4,file_path + '4_of_clubs.png'), (4,file_path + '4_of_hearts.png'), (4,file_path + '4_of_spades.png'), (4,file_path + '4_of_diamonds.png'),
-	      (5,file_path + '5_of_clubs.png'), (5,file_path + '5_of_hearts.png'), (5,file_path + '5_of_spades.png'), (5,file_path + '5_of_diamonds.png'),
-	      (6,file_path + '6_of_clubs.png'), (6,file_path + '6_of_hearts.png'), (6,file_path + '6_of_spades.png'), (6,file_path + '6_of_diamonds.png'),
-	      (7,file_path + '7_of_clubs.png'), (7,file_path + '7_of_hearts.png'), (7,file_path + '7_of_spades.png'), (7,file_path + '7_of_diamonds.png'),
-	      (8,file_path + '8_of_clubs.png'), (8,file_path + '8_of_hearts.png'), (8,file_path + '8_of_spades.png'), (8,file_path + '8_of_diamonds.png'),
-	      (9,file_path + '9_of_clubs.png'), (9,file_path + '9_of_hearts.png'), (9,file_path + '9_of_spades.png'), (9,file_path + '9_of_diamonds.png'),
-	      (10,file_path + '10_of_clubs.png'), (10,file_path + '10_of_hearts.png'), (10,file_path + '10_of_spades.png'), (10,file_path + '10_of_diamonds.png'),
-          (10,file_path + 'jack_of_clubs.png'), (10,file_path + 'jack_of_hearts.png'), (10,file_path + 'jack_of_spades.png'), (10,file_path + 'jack_of_diamonds.png'),
-          (10,file_path + 'queen_of_clubs.png'), (10,file_path + 'queen_of_hearts.png'), (10,file_path + 'queen_of_spades.png'), (10,file_path + 'queen_of_diamonds.png'),
-          (10,file_path + 'king_of_clubs.png'), (10,file_path + 'king_of_hearts.png'), (10,file_path + 'king_of_spades.png'), (10,file_path + 'king_of_diamonds.png')]
+
+    # construct path to card image files
+    file_path = os.path.join(dir, "images")
+    
+    deck=[(11,file_path + '\\ace_of_clubs.png'), (11,file_path + '\\ace_of_hearts.png'), (11,file_path + '\\ace_of_spades.png'), (11,file_path + '\\ace_of_diamonds.png'),
+          (2,file_path + '\\2_of_clubs.png'), (2,file_path + '\\2_of_hearts.png'), (2,file_path + '\\2_of_spades.png'), (2,file_path + '\\2_of_diamonds.png'),
+          (3,file_path + '\\3_of_clubs.png'), (3,file_path + '\\3_of_hearts.png'), (3,file_path + '\\3_of_spades.png'), (3,file_path + '\\3_of_diamonds.png'),
+	      (4,file_path + '\\4_of_clubs.png'), (4,file_path + '\\4_of_hearts.png'), (4,file_path + '\\4_of_spades.png'), (4,file_path + '\\4_of_diamonds.png'),
+	      (5,file_path + '\\5_of_clubs.png'), (5,file_path + '\\5_of_hearts.png'), (5,file_path + '\\5_of_spades.png'), (5,file_path + '\\5_of_diamonds.png'),
+	      (6,file_path + '\\6_of_clubs.png'), (6,file_path + '\\6_of_hearts.png'), (6,file_path + '\\6_of_spades.png'), (6,file_path + '\\6_of_diamonds.png'),
+	      (7,file_path + '\\7_of_clubs.png'), (7,file_path + '\\7_of_hearts.png'), (7,file_path + '\\7_of_spades.png'), (7,file_path + '\\7_of_diamonds.png'),
+	      (8,file_path + '\\8_of_clubs.png'), (8,file_path + '\\8_of_hearts.png'), (8,file_path + '\\8_of_spades.png'), (8,file_path + '\\8_of_diamonds.png'),
+	      (9,file_path + '\\9_of_clubs.png'), (9,file_path + '\\9_of_hearts.png'), (9,file_path + '\\9_of_spades.png'), (9,file_path + '\\9_of_diamonds.png'),
+	      (10,file_path + '\\10_of_clubs.png'), (10,file_path + '\\10_of_hearts.png'), (10,file_path + '\\10_of_spades.png'), (10,file_path + '\\10_of_diamonds.png'),
+          (10,file_path + '\\jack_of_clubs.png'), (10,file_path + '\\jack_of_hearts.png'), (10,file_path + '\\jack_of_spades.png'), (10,file_path + '\\jack_of_diamonds.png'),
+          (10,file_path + '\\queen_of_clubs.png'), (10,file_path + '\\queen_of_hearts.png'), (10,file_path + '\\queen_of_spades.png'), (10,file_path + '\\queen_of_diamonds.png'),
+          (10,file_path + '\\king_of_clubs.png'), (10,file_path + '\\king_of_hearts.png'), (10,file_path + '\\king_of_spades.png'), (10,file_path + '\\king_of_diamonds.png')]
 
     #create a shoe with 4 decks
     current_deck = deck.copy()
