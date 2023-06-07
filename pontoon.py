@@ -170,7 +170,7 @@ def deal():
 
 def twist():
 
-    #only twist if in a game
+    
     global in_game
     global player_stuck
     global player_score
@@ -179,6 +179,7 @@ def twist():
     global hand_over
     global player_ace_count
 
+    #only twist if in a game
     if in_game and not player_stuck:
         i=0
         while i < 5:
@@ -288,36 +289,6 @@ def button(msg,x,y,w,h,ic,ac,action=None):
         
     message_display((x+(w/2)), (y+(h/2)),msg,15)
  
-def playerBust():
-    global player_bust
-
-    message_display(600,480,"You bust!",70)
-    player_bust = True
-
-def dealerBust():
-    global dealer_bust
-    
-    message_display(600,50,"Dealer bust!",70)
-    dealer_bust = True
-
-def playerWon():
-    global player_won
-
-    message_display(600,480,"You won!",70)
-    player_won = True
-
-def dealerWon():
-    global dealer_won
-    
-    message_display(600,50,"Dealer won!",70)
-    dealer_won = True
-
-def game_drawn():
-    global draw
-
-    message_display(600,480,"You Drew!",70)
-    draw = True
-
 def quitgame ():
     pygame.quit()
     quit()    
@@ -356,21 +327,18 @@ def game_loop():
         button("Quit",730,750,50,25,green,bright_green,quitgame)
 
         if dealer_bust:
-            playerWon()
-            dealerBust()
+            message_display(600,480,"You won!",70)
+            message_display(600,50,"Dealer bust!",70)
 
         if player_bust:
-            playerBust()
-            dealerWon()
-
-        if player_won:
-            playerWon()
+            message_display(600,480,"You bust!",70)
+            message_display(600,50,"Dealer won!",70)
 
         if dealer_won:
-            dealerWon()
+            message_display(600,50,"Dealer won!",70)
 
         if draw:
-            game_drawn()
+                message_display(600,480,"You Drew!",70)
 
         index = 0
         card_x = [330, 440, 550, 660, 770]
