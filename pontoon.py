@@ -23,7 +23,9 @@ shoe drops to under 10, the game creates a new shoe. You also start with £100
 and stake £5 on each hand. The game allows you to go into debt, so be careful 
 not to lose your shirt!
 
-"""
+Author: Andy Gibbons
+Latest update: June 2023
+----------------------------------------------------------------------------"""
 import pygame
 import random
 import os
