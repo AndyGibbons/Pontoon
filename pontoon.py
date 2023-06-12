@@ -18,10 +18,10 @@ beat you. The dealer must stick on 17 or above, but cannot stick lower than
 that.
 
 The shoe (set of cards used in the game) contains four packs of cards, in case 
-you fancy tring your hand at card counting. When the number of cards left in the 
-shoe drops to under 10, the game creates a new shoe. You also start with £100 
-and stake £5 on each hand. The game allows you to go into debt, so be careful 
-not to lose your shirt!
+you fancy trying your hand at card counting. 
+When the number of cards left in the shoe drops to under 10, the game creates 
+a new shoe. You also start with £100 and stake £5 on each hand. The game allows
+you to go into debt, so be careful not to lose your shirt!
 
 Author: Andy Gibbons
 Latest update: June 2023
@@ -36,21 +36,22 @@ pygame.init()
 gameState = {
     "hand" : [None, None, None, None, None],    # player's cards
     "dealer" : [None, None, None, None, None],  # dealer's cards 
-    "in_game" : False,                          # a hand is being played  
-    "current_deck" : [],                        # The current shoe of cards
-    "player_stuck" : False,                     # Player chose to stick
-    "player_bust" : False,                      # The player scored > 21
-    "player_won" : False,                       # Yay!
-    "dealer_bust" : False,                      # The dealer scored > 21
-    "dealer_won" : False,                       # Boo!
-    "player_score" : 0,                         # Player's score in current hand
-    "dealer_score" : 0,                         # Dealer's score in current hand
-    "player_stake" : 5,                         # The amount of each bet
-    "player_funds" : 100,                       # The player's starting pot
-    "draw" : False,                             # The hamd is drawn
-    "hand_over" : False,                        # The hand is over
-    "player_ace_count" : 0,                     # The number of aces in player's hand
-    "dealer_ace_count" : 0}                     # The number pf aces in dealer's hand
+
+    "in_game" : False,                     # a hand is being played  
+    "current_deck" : [],                   # The current shoe of cards
+    "player_stuck" : False,                # Player chose to stick
+    "player_bust" : False,                 # The player scored > 21
+    "player_won" : False,                  # Yay!
+    "dealer_bust" : False,                 # The dealer scored > 21
+    "dealer_won" : False,                  # Boo!
+    "player_score" : 0,                    # Player's score in current hand
+    "dealer_score" : 0,                    # Dealer's score in current hand
+    "player_stake" : 5,                    # The amount of each bet
+    "player_funds" : 100,                  # The player's starting pot
+    "draw" : False,                        # The hamd is drawn
+    "hand_over" : False,                   # The hand is over
+    "player_ace_count" : 0,                # number of aces in player's hand
+    "dealer_ace_count" : 0}                # number of aces in dealer's hand
  
 # Set up the display for the game
 display_width = 1200
@@ -68,12 +69,12 @@ green = (0, 200, 0)
 bg_colour = (0,120,0)
 block_color = (53,115,255)
 
-"""-----------------------------------------------------------------------------
+"""----------------------------------------------------------------------------
 user-defined functions
------------------------------------------------------------------------------"""
+----------------------------------------------------------------------------"""
 
 def create_shoe():
-    """ create the set of cards for the game made of four packs of playing cards"""
+    """ create the cards for the game made of four packs of playing cards"""
     global gameState
 
     #find path to the game's directory
@@ -83,19 +84,32 @@ def create_shoe():
     file_path = os.path.join(dir, "images")
     
     # list containing the card images and the card numerical values
-    deck=[(11,file_path + '\\ace_of_clubs.png'), (11,file_path + '\\ace_of_hearts.png'), (11,file_path + '\\ace_of_spades.png'), (11,file_path + '\\ace_of_diamonds.png'),
-          (2,file_path + '\\2_of_clubs.png'), (2,file_path + '\\2_of_hearts.png'), (2,file_path + '\\2_of_spades.png'), (2,file_path + '\\2_of_diamonds.png'),
-          (3,file_path + '\\3_of_clubs.png'), (3,file_path + '\\3_of_hearts.png'), (3,file_path + '\\3_of_spades.png'), (3,file_path + '\\3_of_diamonds.png'),
-	      (4,file_path + '\\4_of_clubs.png'), (4,file_path + '\\4_of_hearts.png'), (4,file_path + '\\4_of_spades.png'), (4,file_path + '\\4_of_diamonds.png'),
-	      (5,file_path + '\\5_of_clubs.png'), (5,file_path + '\\5_of_hearts.png'), (5,file_path + '\\5_of_spades.png'), (5,file_path + '\\5_of_diamonds.png'),
-	      (6,file_path + '\\6_of_clubs.png'), (6,file_path + '\\6_of_hearts.png'), (6,file_path + '\\6_of_spades.png'), (6,file_path + '\\6_of_diamonds.png'),
-	      (7,file_path + '\\7_of_clubs.png'), (7,file_path + '\\7_of_hearts.png'), (7,file_path + '\\7_of_spades.png'), (7,file_path + '\\7_of_diamonds.png'),
-	      (8,file_path + '\\8_of_clubs.png'), (8,file_path + '\\8_of_hearts.png'), (8,file_path + '\\8_of_spades.png'), (8,file_path + '\\8_of_diamonds.png'),
-	      (9,file_path + '\\9_of_clubs.png'), (9,file_path + '\\9_of_hearts.png'), (9,file_path + '\\9_of_spades.png'), (9,file_path + '\\9_of_diamonds.png'),
-	      (10,file_path + '\\10_of_clubs.png'), (10,file_path + '\\10_of_hearts.png'), (10,file_path + '\\10_of_spades.png'), (10,file_path + '\\10_of_diamonds.png'),
-          (10,file_path + '\\jack_of_clubs.png'), (10,file_path + '\\jack_of_hearts.png'), (10,file_path + '\\jack_of_spades.png'), (10,file_path + '\\jack_of_diamonds.png'),
-          (10,file_path + '\\queen_of_clubs.png'), (10,file_path + '\\queen_of_hearts.png'), (10,file_path + '\\queen_of_spades.png'), (10,file_path + '\\queen_of_diamonds.png'),
-          (10,file_path + '\\king_of_clubs.png'), (10,file_path + '\\king_of_hearts.png'), (10,file_path + '\\king_of_spades.png'), (10,file_path + '\\king_of_diamonds.png')]
+    
+    # add aces and picture cards to the deck
+    deck = [(11,file_path + '\\ace_of_clubs.png'), 
+          (11,file_path + '\\ace_of_hearts.png'), 
+          (11,file_path + '\\ace_of_spades.png'), 
+          (11,file_path + '\\ace_of_diamonds.png'),
+          (10,file_path + '\\jack_of_clubs.png'), 
+          (10,file_path + '\\jack_of_hearts.png'), 
+          (10,file_path + '\\jack_of_spades.png'), 
+          (10,file_path + '\\jack_of_diamonds.png'),
+          (10,file_path + '\\queen_of_clubs.png'), 
+          (10,file_path + '\\queen_of_hearts.png'), 
+          (10,file_path + '\\queen_of_spades.png'), 
+          (10,file_path + '\\queen_of_diamonds.png'),
+          (10,file_path + '\\king_of_clubs.png'), 
+          (10,file_path + '\\king_of_hearts.png'), 
+          (10,file_path + '\\king_of_spades.png'), 
+          (10,file_path + '\\king_of_diamonds.png')]
+    
+    # add remaining cards to the deck
+    for value in range(2,11):
+        deck.append((value,file_path + '\\' + str(value) + '_of_clubs.png')) 
+        deck.append((value,file_path + '\\' + str(value) + '_of_hearts.png')) 
+        deck.append((value,file_path + '\\' + str(value) + '_of_spades.png')) 
+        deck.append((value,file_path + '\\' + str(value) + '_of_diamonds.png'))
+
 
     #create a shoe with 4 decks
     gameState["current_deck"] = deck.copy()
@@ -103,7 +117,7 @@ def create_shoe():
     gameState["current_deck"].extend(gameState["current_deck"])
 
 def reset_hand():
-    """ reset the game state values used for playing a hand to use in a new hand """
+    """ reset game state values used playing a hand to use in a new hand """
     global gameState
 
     gameState["hand"] = [None, None, None, None, None]   
@@ -297,9 +311,12 @@ def game_loop():
         message_display((display_width/2),(display_height/2),"Pontoon!",115)
         message_display(180,200,"Dealer",70)
         message_display(220,600,"You",70)
-        message_display(1000,700,"Stake: £" + str(gameState["player_stake"]),20)
-        message_display(1010,730,"Funds: £" + str(gameState["player_funds"]),20)
-        message_display(1010,760,"Cards: " + str(len(gameState["current_deck"])),20)
+        message_display(1000,700,"Stake: £" 
+                        + str(gameState["player_stake"]),20)
+        message_display(1010,730,"Funds: £" 
+                        + str(gameState["player_funds"]),20)
+        message_display(1010,760,"Cards: " 
+                        + str(len(gameState["current_deck"])),20)
 
         # create buttons to call main game functions
         button("Deal",430,750,50,25,green,bright_green,deal)
