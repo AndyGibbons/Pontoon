@@ -3,6 +3,9 @@ Pontoon!
 
 This is a single-player version of Pontoon (aka Blackjack or 21).
 
+![image](https://github.com/AndyGibbons/Pontoon/assets/6034448/9aab0c70-837a-4c03-855a-1c2eeddb079c)
+
+
 How to play
 ===========
 
